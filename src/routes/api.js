@@ -11,5 +11,19 @@ const router = express.Router();
 router.get("/health", (req, res) => {
   res.json({ status: "ok", time: new Date().toISOString() });
 });
+router.post("/auth/login", (req, res) => {
+  const { username, password } = req.body;
 
+  if (!username || !password) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing credentials",
+    });
+  }
+
+  return res.json({
+    success: true,
+    message: "Login successful",
+  });
+});
 module.exports = { router };

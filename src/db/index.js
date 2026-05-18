@@ -1,20 +1,34 @@
-/**
- * Database module (starter stub).
- *
- * Feature branch: feature/database-connection should implement:
- * - connect()
- * - a config pattern using environment variables
- * - a simple query function OR a client getter
- *
- * You may use:
- * - a "fake" in-memory database for the checkpoint, OR
- * - SQLite, OR
- * - MongoDB/Postgres (optional) — keep setup simple
- */
+const dbConfig = {
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "admin",
+  password: process.env.DB_PASSWORD || "password",
+  database: process.env.DB_NAME || "csp451",
+};
 
 function connect() {
-  // Placeholder: simulate a successful connection
-  return { connected: true, driver: "stub" };
+  console.log("Connecting to database...");
+  console.log(`Host: ${dbConfig.host}`);
+  console.log(`Database: ${dbConfig.database}`);
+
+  return {
+    connected: true,
+    message: "Database connected successfully",
+  };
 }
 
-module.exports = { connect };
+function getClient() {
+  return dbConfig;
+}
+function query(sql) {
+  console.log(`Running query: ${sql}`);
+
+  return {
+    success: true,
+    rows: [],
+  };
+}
+module.exports = {
+  connect,
+  getClient,
+  query,
+};

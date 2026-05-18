@@ -19,8 +19,16 @@ function connect() {
 function getClient() {
   return dbConfig;
 }
+function query(sql) {
+  console.log(`Running query: ${sql}`);
 
+  return {
+    success: true,
+    rows: [],
+  };
+}
 module.exports = {
   connect,
   getClient,
+  query,
 };
